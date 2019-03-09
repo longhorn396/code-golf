@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 
+"""Computes the factorial of input numbers and compares its compute time across algorithms"""
+
 from timeit import default_timer as timer
+from main_wrapper import main_one_arg as main
 
 def factorial(num):
     """Recursive solution"""
     if num >= 2:
         return num * factorial(num - 1)
-    else:
-        return 1
+    return 1
 
 def tail_factorial(num, result=1):
     """Tail-recursive solution"""
     if num >= 2:
         return tail_factorial(num - 1, num * result)
-    else:
-        return result
+    return result
 
 def compare_factorials(number):
+    """Compares the times to compute the factorial of a number"""
     attempts = int(input("Attempts:\n"))
     rec_tot = 0.0
     tail_tot = 0.0
@@ -32,10 +34,4 @@ def compare_factorials(number):
         attempts, tail_tot / attempts)
 
 if __name__ == "__main__":
-    funs = {"recursive": factorial, "tail": tail_factorial, "compare": compare_factorials}
-    print("What subfunction would you like to do?")
-    subf = input("Options: " + str([f for f, _ in funs.items()]) + "\n")
-    if subf in funs.keys():
-        print(funs[subf](int(input("Number:\n"))))
-    else:
-        raise Exception
+    main({"recursive": factorial, "tail": tail_factorial, "compare": compare_factorials}, "Number")

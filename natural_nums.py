@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
+"""Finds the nth natural number"""
+
 def find_nth_natural_number(n, limit):
+    """Returns the nth natural number and the number containing it"""
     assert n >= 1
     m = {}
     nums = []
@@ -8,7 +11,7 @@ def find_nth_natural_number(n, limit):
     for i in range(1, limit + 1):
         nums.append(i)
         new_len = len(str(i)) + prev_len
-        m = {**{j: (prev_len, new_len) for j in range(prev_len + 1, new_len + 1)}, **m}
+        m.update({j: (prev_len, new_len) for j in range(prev_len + 1, new_len + 1)})
         if new_len >= n:
             break
         prev_len = new_len

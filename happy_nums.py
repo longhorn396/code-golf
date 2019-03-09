@@ -4,6 +4,7 @@
 Numbers are also happy if that sum is happy, and so on."""
 
 from itertools import count
+from main_wrapper import main_no_args as main
 
 def is_happy(num):
     """Process of finding happy numbers"""
@@ -38,10 +39,4 @@ def evaluate():
     return is_happy(int(input("Input a number for a happiness check\n")))
 
 if __name__ == "__main__":
-    funs = {"search": search, "eval": evaluate}
-    print("What subfunction would you like to do?")
-    subf = input("Options: " + str([f for f, _ in funs.items()]) + "\n")
-    if subf in funs.keys():
-        print(funs[subf]())
-    else:
-        raise Exception
+    main({"search": search, "eval": evaluate})
