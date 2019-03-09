@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Finds 'Happy' numbers. Numbers are happy if the sum of the squares of their digits equals 1.
 Numbers are also happy if that sum is happy, and so on."""
@@ -20,6 +20,7 @@ def is_happy(num):
     return False
 
 def search():
+    """Returns a list of happy numbers"""
     try:
         wanted = int(input("How many happy numbers do you want to find?\n"))
     except ValueError:
@@ -33,16 +34,14 @@ def search():
     return happy_nums
 
 def evaluate():
+    """Returns whether or not a number is happy"""
     return is_happy(int(input("Input a number for a happiness check\n")))
 
 if __name__ == "__main__":
-    funs = ["search", "eval"]
-    subf = raw_input("What subfunction would you like to do?\n")
-    print(subf)
-    print(type(subf))
-    if subf == "search":
-        print(search())
-    elif subf == "eval":
-        print(evaluate())
+    funs = {"search": search, "eval": evaluate}
+    print("What subfunction would you like to do?")
+    subf = input("Options: " + str([f for f, _ in funs.items()]) + "\n")
+    if subf in funs.keys():
+        print(funs[subf]())
     else:
         raise Exception
