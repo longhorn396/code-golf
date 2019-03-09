@@ -5,10 +5,17 @@
 from timeit import default_timer as timer
 from main_wrapper import main_one_arg as main
 
-def factorial(num):
+def iterative_factorial(num):
+    """Iterative solution"""
+    result = 1
+    for i in range(2, num + 1):
+        result *= i
+    return result
+
+def recursive_factorial(num):
     """Recursive solution"""
     if num >= 2:
-        return num * factorial(num - 1)
+        return num * recursive_factorial(num - 1)
     return 1
 
 def tail_factorial(num, result=1):
@@ -24,7 +31,7 @@ def compare_factorials(number):
     tail_tot = 0.0
     for _ in range(attempts):
         rec_tot -= timer()
-        recursive = factorial(number)
+        recursive = recursive_factorial(number)
         rec_tot += timer()
         tail_tot -= timer()
         tail = tail_factorial(number, 1)
@@ -34,4 +41,9 @@ def compare_factorials(number):
         attempts, tail_tot / attempts)
 
 if __name__ == "__main__":
-    main({"recursive": factorial, "tail": tail_factorial, "compare": compare_factorials}, "Number")
+    main({
+        "iterative": iterative_factorial,
+        "recursive": recursive_factorial, 
+        "tail": tail_factorial, 
+        "compare": compare_factorials
+        },"Number")
