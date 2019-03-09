@@ -1,6 +1,5 @@
-"""Computes the factorial of an integer"""
+#!/usr/bin/env python3
 
-from sys import argv
 from timeit import default_timer as timer
 
 def factorial(num):
@@ -10,33 +9,33 @@ def factorial(num):
     else:
         return 1
 
-def tail_factorial(num, result):
+def tail_factorial(num, result=1):
     """Tail-recursive solution"""
     if num >= 2:
         return tail_factorial(num - 1, num * result)
     else:
         return result
 
+def compare_factorials(number):
+    attempts = int(input("Attempts:\n"))
+    rec_tot = 0.0
+    tail_tot = 0.0
+    for _ in range(attempts):
+        rec_tot -= timer()
+        recursive = factorial(number)
+        rec_tot += timer()
+        tail_tot -= timer()
+        tail = tail_factorial(number, 1)
+        tail_tot += timer()
+        assert recursive == tail
+    return "Average Recursive time:\t\t{}\nAverage Tail-recursive time:\t{}".format(rec_tot /\
+        attempts, tail_tot / attempts)
+
 if __name__ == "__main__":
-    if argv[1] == "tail":
-        print(tail_factorial(int(argv[2]), 1))
-    elif argv[1] == "recursive":
-        print(factorial(int(argv[2])))
+    funs = {"recursive": factorial, "tail": tail_factorial, "compare": compare_factorials}
+    print("What subfunction would you like to do?")
+    subf = input("Options: " + str([f for f, _ in funs.items()]) + "\n")
+    if subf in funs.keys():
+        print(funs[subf](int(input("Number:\n"))))
     else:
-        number = int(argv[1])
-        try:
-            attempts = int(argv[2])
-        except IndexError:
-            attempts = 10
-        rec_tot = 0.0
-        tail_tot = 0.0
-        for _ in range(attempts):
-            rec_tot -= timer()
-            recursive = factorial(number)
-            rec_tot += timer()
-            tail_tot -= timer()
-            tail = tail_factorial(number, 1)
-            tail_tot += timer()
-            assert recursive == tail
-        print("Average Recursive time:\t\t{}".format(rec_tot / attempts))
-        print("Average Tail-recursive time:\t{}".format(tail_tot / attempts))
+        raise Exception
