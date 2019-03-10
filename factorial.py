@@ -3,7 +3,7 @@
 """Computes the factorial of input numbers and compares its compute time across algorithms"""
 
 from timeit import default_timer as timer
-from main_wrapper import main_one_arg as main
+from main_wrapper import main_with_compare_and_arg as main
 
 def iterative_factorial(num):
     """Iterative solution"""
@@ -24,21 +24,17 @@ def tail_factorial(num, result=1):
         return tail_factorial(num - 1, num * result)
     return result
 
-def compare_factorials(number):
+def compare_factorials(funs, number):
     """Compares the times to compute the factorial of a number"""
     attempts = int(input("Attempts:\n"))
-    rec_tot = 0.0
-    tail_tot = 0.0
+    times = {s: 0 for s, _ in funs.items()}
     for _ in range(attempts):
-        rec_tot -= timer()
-        recursive = recursive_factorial(number)
-        rec_tot += timer()
-        tail_tot -= timer()
-        tail = tail_factorial(number, 1)
-        tail_tot += timer()
-        assert recursive == tail
-    return "Average Recursive time:\t\t{}\nAverage Tail-recursive time:\t{}".format(rec_tot /\
-        attempts, tail_tot / attempts)
+        for s, f in funs.items():
+            time = -timer()
+            f(number)
+            time += timer()
+            times[s] += time
+    return "".join(["Average " + s + " time: " + str(t) + "\n" for s, t in times.items()])
 
 if __name__ == "__main__":
     main({
