@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-"""Module to translate english into Pig Latin"""
+"""Module to translate english into Pig Latin
+Rules obtained from https://en.wikipedia.org/wiki/Pig_Latin#Rules"""
 
 from string import punctuation
 from common import main_subf as main
@@ -12,16 +13,17 @@ def simple_translate(english):
 
 def full_translation(english):
     """More advanced and correct translation"""
-    vowels = "AaEeIiOoUu"
     words = english.lower().split()
+    vowels = "AaEeIiOoUu"
+    ending_punct = ".?!"
     pig_latin = []
+    cap_next = True
     for word in words:
-        beginning = word[0]
-        if beginning in vowels:
+        if word[0] in vowels:
             if word[-1] in punctuation:
-                pig_latin += [word[:len(word) - 1] + "way" + word[-1]]
+                plw = word[:len(word) - 1] + "way" + word[-1]
             else:
-                pig_latin += [word + "way"]
+                plw = word + "way"
         else:
             cluster = ""
             for char in word:
@@ -29,11 +31,15 @@ def full_translation(english):
                     cluster += char
                 else:
                     if word[-1] in punctuation:
-                        pig_latin += \
-                            [word[word.index(char):len(word) - 1] + cluster + "ay" + word[-1]]
+                        plw = word[word.index(char):len(word) - 1] + cluster + "ay" + word[-1]
                     else:
-                        pig_latin += [word[word.index(char):] + cluster + "ay"]
+                        plw = word[word.index(char):] + cluster + "ay"
                     break
+        if cap_next:
+            plw = plw[0].upper() + plw[1:]
+            cap_next = False
+        cap_next = plw[-1] in ending_punct
+        pig_latin += [plw]
     return " ".join(pig_latin)
 
 if __name__ == "__main__":
