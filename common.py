@@ -12,6 +12,15 @@ def use_custom_exception_handler():
     import sys
     sys.excepthook = _my_exception_handler
 
+def main(fun, trans, *prompts):
+    """Main method when a module only has one function"""
+    use_custom_exception_handler()
+    args = [trans(input(p + ":\n")) for p in prompts]
+    try:
+        print(fun(*args))
+    except AssertionError:
+        print("Make sure you pass in valid arguments")
+
 def compare_subfs(funs, tries):
     """Compares the execution times of functions in this module"""
     from timeit import default_timer as timer
