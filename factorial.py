@@ -5,7 +5,7 @@
 from math import factorial as imported
 from functools import reduce
 from operator import mul
-from common import main_with_compare_and_arg as main
+from common import main_subf as main
 from common import compare_subfs as compare
 
 def for_factorial(num):
@@ -65,4 +65,4 @@ if __name__ == "__main__":
         "reduce1": reduce1_factorial,
         "reduce2": reduce2_factorial,
         "compare": compare
-    }, "Number", int, lambda x: x >= 0)
+    }, int, lambda x: x >= 0, "Number")

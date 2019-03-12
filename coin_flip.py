@@ -5,7 +5,7 @@
 from random import choice
 from functools import reduce
 from operator import add
-from common import main_with_compare_and_arg as main
+from common import main_subf as main
 from common import compare_subfs as compare
 
 def coin_flip_sequence_sum(tries):
@@ -29,4 +29,4 @@ if __name__ == "__main__":
         "sum": coin_flip_sequence_sum,
         "reduce": coin_flip_sequence_reduce,
         "compare": compare
-    }, "How many coins to flip?", int, lambda x: x >= 1)
+    }, int, lambda x: x >= 1, "How many coins to flip?")
