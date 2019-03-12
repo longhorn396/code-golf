@@ -2,11 +2,11 @@
 
 """Computes the factorial of input numbers and compares its compute time across algorithms"""
 
-from timeit import default_timer as timer
 from math import factorial as imported
 from functools import reduce
 from operator import mul
 from common import main_with_compare_and_arg as main
+from common import compare_subfs as compare
 
 def for_factorial(num):
     """Iterative solution"""
@@ -54,18 +54,6 @@ def reduce2_factorial(num):
     """Solution that uses reduce and the mul operator"""
     return reduce(mul, range(1, num + 1), 1)
 
-def compare_factorials(funs, number):
-    """Compares the times to compute the factorial of a number"""
-    attempts = int(input("Attempts:\n"))
-    times = {s: 0 for s, _ in funs.items()}
-    for _ in range(attempts):
-        for s, f in funs.items():
-            time = -timer()
-            f(number)
-            time += timer()
-            times[s] += time / attempts
-    return "".join(["{:10s} average: {:.15f}\n".format(s, t) for s, t in times.items()])
-
 if __name__ == "__main__":
     main({
         "imported": imported,
@@ -76,5 +64,5 @@ if __name__ == "__main__":
         "range_iter": range_factorial,
         "reduce1": reduce1_factorial,
         "reduce2": reduce2_factorial,
-        "compare": compare_factorials
+        "compare": compare
     }, "Number", int, lambda x: x >= 0)

@@ -12,6 +12,20 @@ def use_custom_exception_handler():
     import sys
     sys.excepthook = _my_exception_handler
 
+def compare_subfs(funs, tries):
+    """Compares the execution times of functions in this module"""
+    from timeit import default_timer as timer
+    spaces = max([len(s) for s in funs.keys()])
+    times = {s: 0 for s in funs.keys()}
+    attempts = int(input("Attempts:\n"))
+    for _ in range(attempts):
+        for s, f in funs.items():
+            time = -timer()
+            f(tries)
+            time += timer()
+            times[s] += time / attempts
+    return "".join([f"{s: <{spaces}} average: {t:.15f}\n" for s, t in times.items()])
+
 def main_no_args(funs):
     """Main method without extra arguments"""
     print("What subfunction would you like to do?")
