@@ -6,7 +6,7 @@ from timeit import default_timer as timer
 from math import factorial as imported
 from functools import reduce
 from operator import mul
-from main_wrapper import main_with_compare_and_arg as main
+from common import main_with_compare_and_arg as main
 
 def for_factorial(num):
     """Iterative solution"""
@@ -47,9 +47,11 @@ def range_factorial(num):
     return result
 
 def reduce1_factorial(num):
+    """Solution that uses reduce and a lambda"""
     return reduce(lambda x, y: x * y, range(1, num + 1), 1)
 
 def reduce2_factorial(num):
+    """Solution that uses reduce and the mul operator"""
     return reduce(mul, range(1, num + 1), 1)
 
 def compare_factorials(funs, number):
@@ -62,7 +64,7 @@ def compare_factorials(funs, number):
             f(number)
             time += timer()
             times[s] += time / attempts
-    return "".join(["Average {:10s} time: {:.15f}\n".format(s, t) for s, t in times.items()])
+    return "".join(["{:10s} average: {:.15f}\n".format(s, t) for s, t in times.items()])
 
 if __name__ == "__main__":
     main({
@@ -75,4 +77,4 @@ if __name__ == "__main__":
         "reduce1": reduce1_factorial,
         "reduce2": reduce2_factorial,
         "compare": compare_factorials
-        }, "Number")
+    }, "Number", int, lambda x: x >= 0)

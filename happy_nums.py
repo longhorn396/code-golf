@@ -4,12 +4,12 @@
 Numbers are also happy if that sum is happy, and so on."""
 
 from itertools import count
-from main_wrapper import main_no_args as main
+from common import main_no_args as main
 
 def is_happy(num):
     """Process of finding happy numbers"""
     eval_set = set()
-    while num not in eval_set:
+    while num not in eval_set and num > 0:
         num_string = str(num)
         squares = [pow(int(i), 2) for i in num_string]
         num_sum = sum(squares)

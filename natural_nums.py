@@ -20,5 +20,8 @@ def find_nth_natural_number(n, limit):
     return "The natural number is {} in {}".format(res_str[n-1], res_str[m[n][0]:m[n][1]])
 
 if __name__ == "__main__":
-    print(find_nth_natural_number(int(input("Which natural number?\n")),\
-        int(input("How big a range?\n"))))
+    try:
+        print(find_nth_natural_number(int(input("Which natural number?\n")),\
+            int(input("How big a range?\n"))))
+    except AssertionError:
+        print("You gave an invalid argument")
