@@ -20,12 +20,8 @@ def is_happy(num):
             return True
     return False
 
-def search():
+def search(wanted):
     """Returns a list of happy numbers"""
-    try:
-        wanted = int(input("How many happy numbers do you want to find?\n"))
-    except ValueError:
-        wanted = 12
     happy_nums = []
     counter = count(1, 1)
     while len(happy_nums) < wanted:
@@ -34,9 +30,5 @@ def search():
             happy_nums.append(num)
     return happy_nums
 
-def evaluate():
-    """Returns whether or not a number is happy"""
-    return is_happy(int(input("Input a number for a happiness check\n")))
-
-if __name__ == "__main__":
-    main({"search": search, "eval": evaluate}, int, lambda x: x > 0)
+if __name__ == "__main__": # pragma: no cover
+    main({"search": search, "eval": is_happy}, int, lambda x: x > 0, "Number")
