@@ -8,8 +8,6 @@ from happy_nums import search, is_happy
 class HappyNumsTestCase(unittest.TestCase):
     """Unit tests for happy_nums.py"""
 
-    out_format = "The happy number is {} in {}"
-
     def test_happyiness(self):
         """is_happy test"""
         nums = [7, 13, 69, 420]
