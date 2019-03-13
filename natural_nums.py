@@ -19,7 +19,7 @@ def find_nth_natural_number(n, limit):
         prev_len = new_len
     res_str = "".join(str(i) for i in nums)
     assert n <= len(res_str)
-    return "The natural number is {} in {}".format(res_str[n-1], res_str[m[n][0]:m[n][1]])
+    return f"The natural number is {res_str[n-1]} in {res_str[m[n][0]:m[n][1]]}"
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     main(find_nth_natural_number, int, "Which natural number?", "How big a range?")
