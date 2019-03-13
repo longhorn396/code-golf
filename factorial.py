@@ -54,7 +54,7 @@ def reduce2_factorial(num):
     """Solution that uses reduce and the mul operator"""
     return reduce(mul, range(1, num + 1), 1)
 
-if __name__ == "__main__":
+if __name__ == "__main__": #pragma: no cover
     main({
         "imported": imported,
         "for_loop": for_factorial,
