@@ -25,15 +25,15 @@ def full_translation(english):
             else:
                 plw = word + "way"
         else:
-            cluster = ""
+            plw = ""
             for char in word:
                 if char not in vowels:
-                    cluster += char
+                    plw += char
                 else:
                     if word[-1] in punctuation:
-                        plw = word[word.index(char):len(word) - 1] + cluster + "ay" + word[-1]
+                        plw = word[word.index(char):len(word) - 1] + plw + "ay" + word[-1]
                     else:
-                        plw = word[word.index(char):] + cluster + "ay"
+                        plw = word[word.index(char):] + plw + "ay"
                     break
         if cap_next:
             plw = plw[0].upper() + plw[1:]
@@ -42,7 +42,7 @@ def full_translation(english):
         pig_latin += [plw]
     return " ".join(pig_latin)
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     main({
         "simple": simple_translate,
         "complex": full_translation

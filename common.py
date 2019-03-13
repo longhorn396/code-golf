@@ -1,18 +1,18 @@
 """Helper module for interactive execution and other common functionality"""
 
-def _my_exception_handler(ex_type, value, tb):
+def _my_exception_handler(ex_type, value, tb): # pragma: no cover
     """Exception handler that outputs minimal information for basic Exceptions"""
     print(value)
     if str(ex_type) != "<class 'Exception'>":
         import traceback
         traceback.print_tb(tb)
 
-def use_custom_exception_handler():
+def use_custom_exception_handler(): # pragma: no cover
     """Redefine the system's exception handler"""
     import sys
     sys.excepthook = _my_exception_handler
 
-def main(fun, trans, *prompts):
+def main(fun, trans, *prompts): # pragma: no cover
     """Main method when a module only has one function"""
     use_custom_exception_handler()
     args = [trans(input(p + ":\n")) for p in prompts]
@@ -21,7 +21,7 @@ def main(fun, trans, *prompts):
     except AssertionError:
         print("Make sure you pass in valid arguments")
 
-def compare_subfs(funs, tries):
+def compare_subfs(funs, tries): # pragma: no cover
     """Compares the execution times of functions in this module"""
     from timeit import default_timer as timer
     spaces = max([len(s) for s in funs.keys()])
@@ -35,7 +35,7 @@ def compare_subfs(funs, tries):
             times[s] += time / attempts
     return "".join([f"{s: <{spaces}} average: {t:.15f}\n" for s, t in times.items()])
 
-def main_subf(funs, trans, check, *prompts):
+def main_subf(funs, trans, check, *prompts): # pragma: no cover
     """Main method when subfunctions are involved"""
     use_custom_exception_handler()
     print("What subfunction would you like to do?")
