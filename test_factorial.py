@@ -13,7 +13,7 @@ class FactorialTestCase(unittest.TestCase):
         """Test for the factorial algos"""
         funs = [for_factorial, range_factorial, recursive_factorial, reduce1_factorial,\
             reduce2_factorial, tail_factorial, while_factorial]
-        results = [120 == fun(5) for fun in funs]
+        results = [fun(5) == 120 for fun in funs]
         assert all(results)
 
 if __name__ == "__main__": # pragma: no cover
