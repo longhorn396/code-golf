@@ -1,0 +1,7 @@
+[run]
+branch = True
+omit = common.py
+
+[report]
+show_missing = True
+omit = common.py
