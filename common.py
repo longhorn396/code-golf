@@ -1,4 +1,4 @@
-"""Helper module for interactive execution and other common functionality"""
+"""Helper module for execution and other common functionality"""
 
 def _my_exception_handler(ex_type, value, tb): # pragma: no cover
     """Exception handler that outputs minimal information for basic Exceptions"""
@@ -14,8 +14,12 @@ def use_custom_exception_handler(): # pragma: no cover
 
 def main(fun, trans, *prompts): # pragma: no cover
     """Main method when a module only has one function"""
+    from sys import argv
     use_custom_exception_handler()
-    args = [trans(input(p + ":\n")) for p in prompts]
+    if len(argv) > 1:
+        args = [trans(arg) for arg in argv[1:]]
+    else:
+        args = [trans(input(p + ":\n")) for p in prompts]
     try:
         print(fun(*args))
     except AssertionError:
@@ -37,11 +41,18 @@ def compare_subfs(funs, tries): # pragma: no cover
 
 def main_subf(funs, trans, check, *prompts): # pragma: no cover
     """Main method when subfunctions are involved"""
+    from sys import argv
     use_custom_exception_handler()
-    print("What subfunction would you like to do?")
-    subf = input("Options: " + str([f for f in funs.keys()]) + "\n")
+    if len(argv) > 1:
+        subf = argv[1]
+    else:
+        print("What subfunction would you like to do?")
+        subf = input("Options: " + str([f for f in funs.keys()]) + "\n")
     if subf in funs.keys():
-        args = [trans(input(p + ":\n")) for p in prompts]
+        if len(argv) > 2:
+            args = [trans(arg) for arg in argv[2:]]
+        else:
+            args = [trans(input(p + ":\n")) for p in prompts]
         if all([check(arg) for arg in args]):
             if subf == "compare":
                 comp_fun = funs.pop("compare")
