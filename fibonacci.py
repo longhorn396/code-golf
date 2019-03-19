@@ -7,7 +7,7 @@ from common import compare_subfs as compare
 
 def dumb_fibonacci(n, seq=None):
     """Dumb solution"""
-    if n == 1:
+    if n <= 1:
         return 1, 0, [0]
     if n == 2:
         return 2, 1, [0, 1]
@@ -19,7 +19,7 @@ def dumb_fibonacci(n, seq=None):
 
 def less_dumb_fibonacci(n, seq=None):
     """Slight improvement on the dumb_fibonacci"""
-    if n == 1:
+    if n <= 1:
         return 1, 0, [0]
     if n == 2:
         return 2, 1, [0, 1]
