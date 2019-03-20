@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-"""Test module for pig_latin.py"""
+"""Test module for pig_latin.py
+Examples obtained from https://en.wikipedia.org/wiki/Pig_Latin#Rules"""
 
 import unittest
 from string import punctuation
@@ -34,6 +35,11 @@ class PigLatinTestCase(unittest.TestCase):
     def test_simple_punct(self):
         """Functionality of punctuation in the simple function"""
         self.assertEqual(pig_latin.simple_translate(punctuation), "")
+
+    def test_undo_con(self):
+        """Basic functionality of undo function"""
+        for word in self.con_en:
+            self.assertEqual(word, pig_latin.simple_undo(pig_latin.simple_translate(word)))
 
     def test_full_con(self):
         """Basic functionality of full function"""
