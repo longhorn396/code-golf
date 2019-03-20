@@ -11,8 +11,15 @@ def simple_translate(english):
     words = english.lower().translate(str.maketrans("", "", punctuation)).split()
     return " ".join([word[1:] + word[0] + "ay" for word in words])
 
+def simple_undo(pl):
+    """Undoing simplest translation"""
+    pl += " "
+    words = pl.split("ay ")
+    return " ".join([word[-1] + word[:-1] for word in words[:-1]])
+
 def full_translation(english):
     """More advanced and correct translation"""
+    # TODO: go from full pl back to english
     words = english.lower().split()
     vowels = "AaEeIiOoUu"
     ending_punct = ".?!"
@@ -45,6 +52,7 @@ def full_translation(english):
 if __name__ == "__main__": # pragma: no cover
     main({
         "simple": simple_translate,
+        "sim_undo": simple_undo,
         "complex": full_translation
     }, str, lambda x: not any(char.isdigit() for char in x),\
     "Type text to translate (no numbers)")
