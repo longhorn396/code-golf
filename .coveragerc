@@ -4,4 +4,4 @@ omit = common.py
 
 [report]
 show_missing = True
-omit = common.py
+omit = test_*.py
