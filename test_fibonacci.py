@@ -10,11 +10,11 @@ class FibonacciTestCase(unittest.TestCase):
 
     def test_fibonaccis(self):
         """Test for the fibonacci algos"""
-        funs = [dumb_fibonacci, less_dumb_fibonacci, iterative_fibonacci, recursive_fibonacci]
-        assert all([fun(1) == (1, 0, [0]) for fun in funs])
-        assert all([fun(2) == (2, 1, [0, 1]) for fun in funs])
-        assert all([fun(5) == (5, 3, [0, 1, 1, 2, 3]) for fun in funs])
-        assert all([fun(10) == (10, 34, [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]) for fun in funs])
+        fs = [dumb_fibonacci, less_dumb_fibonacci, iterative_fibonacci, recursive_fibonacci]
+        self.assertTrue(all([f(1) == (1, 0, [0]) for f in fs]))
+        self.assertTrue(all([f(2) == (2, 1, [0, 1]) for f in fs]))
+        self.assertTrue(all([f(5) == (5, 3, [0, 1, 1, 2, 3]) for f in fs]))
+        self.assertTrue(all([f(10) == (10, 34, [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]) for f in fs]))
 
 if __name__ == "__main__": # pragma: no cover
     unittest.main()

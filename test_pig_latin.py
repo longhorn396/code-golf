@@ -25,7 +25,7 @@ class PigLatinTestCase(unittest.TestCase):
     def help_test(self, fun, english, translated):
         """Helper for most tests"""
         for i, en in enumerate(english):
-            assert fun(en).lower() == translated[i].lower()
+            self.assertEqual(fun(en).lower(), translated[i].lower())
 
     def test_simple_con(self):
         """Basic functionality of simple function"""
@@ -33,7 +33,7 @@ class PigLatinTestCase(unittest.TestCase):
 
     def test_simple_punct(self):
         """Functionality of punctuation in the simple function"""
-        assert pig_latin.simple_translate(punctuation) == ""
+        self.assertEqual(pig_latin.simple_translate(punctuation), "")
 
     def test_full_con(self):
         """Basic functionality of full function"""
@@ -49,11 +49,11 @@ class PigLatinTestCase(unittest.TestCase):
 
     def test_full_punct(self):
         """Functionality of punctuation in the full function"""
-        assert pig_latin.full_translation(punctuation) == punctuation
+        self.assertEqual(pig_latin.full_translation(punctuation), punctuation)
 
     def test_full_para(self):
         """Paragraph functionality of full function"""
-        assert pig_latin.full_translation(self.para_en) == self.para_pl
+        self.assertEqual(pig_latin.full_translation(self.para_en), self.para_pl)
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()

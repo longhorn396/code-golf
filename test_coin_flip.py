@@ -11,11 +11,8 @@ class coin_flipTestCase(unittest.TestCase):
     def _helper(self, result):
         """Logic for testing"""
         segments = result.split("\n")
-        seq = segments[0].split(", ")
-        self.assertEqual(len(seq), 5)
-        num_heads = int(segments[1][0])
-        num_tails = int(segments[1][9])
-        assert num_heads + num_tails == 5
+        self.assertEqual(len(segments[0].split(", ")), 5)
+        self.assertEqual(int(segments[1][0]) + int(segments[1][9]), 5)
 
     def test_reduce(self):
         """Test for the reduce algo"""
