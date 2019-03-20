@@ -1,18 +1,19 @@
 .DEFAULT_GOAL := all
 
-all: clean lint coverage
+all: lint coverage clean
 
 clean:
-	rm -f  .coverage
-	rm -rf __pycache__
+	@rm -f  .coverage
+	@rm -rf __pycache__
+	@rm -rf tests/__pycache__
 
 lint:
 	-pylint *.py
 
 coverage:
-	coverage run -a -m unittest discover
+	coverage run -a -m unittest discover tests
 	coverage report
 
-tests:
-	python -m unittest discover
+test:
+	python3 -m unittest discover tests
 	
