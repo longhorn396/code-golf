@@ -9,6 +9,7 @@ clean:
 
 lint:
 	-pylint *.py
+	-pylint tests/*.py
 
 coverage:
 	coverage run -a -m unittest discover tests

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-"""Used to convert Python strings of JSON into human-readable JSON"""
+"""Used to convert Python strings of JSON into human-readable JSON
+Useful when building AWS Lambda functions"""
 
 from ast import literal_eval
 from common import main
@@ -13,9 +14,7 @@ def rprint(obj, tabs=0):
     """Make 'obj' human readable in JSON context"""
     def remove_last_comma(parsed):
         last_comma_index = parsed.rfind(",")
-        if last_comma_index > 0:
-            return parsed[:last_comma_index] + parsed[last_comma_index + 1:]
-        return parsed
+        return parsed[:last_comma_index] + parsed[last_comma_index + 1:]
     parsed = ""
     if isinstance(obj, dict):
         tabs += 1
@@ -43,5 +42,5 @@ def rprint(obj, tabs=0):
         raise Exception(f"Unexpected type: {type(obj)}")
     return parsed.replace("'", '"')
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     main(py_to_js, str, "Object to convert")
