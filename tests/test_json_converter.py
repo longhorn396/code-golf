@@ -90,3 +90,6 @@ class JSONConverterTestCase(unittest.TestCase):
         parsed = '{\n    "Name": "#DIY",\n    "Members": [\n        "Gargano",\n' +\
         '        "Ciampa"\n    ]\n}'
         self.assertEqual(py_to_js(diy), parsed)
+
+if __name__ == "__main__": # pragma: no cover
+    unittest.main()
