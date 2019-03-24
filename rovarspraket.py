@@ -11,5 +11,5 @@ def rovarspraket(english):
         english = f"{u}o{l}".join(f"{l}o{l}".join(english.split(l)).split(u))
     return english
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     main(rovarspraket, str, "Input text to translate")
