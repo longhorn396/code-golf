@@ -17,4 +17,9 @@ coverage:
 
 test:
 	python3 -m unittest discover tests
-	
+
+image:
+	docker build -t pycg .
+
+docker:
+	docker run --rm -it -v c:/Users/ddrawhor/Documents/Code\ Golf:/data -w /data pycg
