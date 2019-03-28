@@ -6,6 +6,8 @@ Rules obtained from https://en.wikipedia.org/wiki/Pig_Latin#Rules"""
 from string import punctuation
 from common import main_subf as main
 
+ending_punct = ".?!"
+
 def simple_translate(english):
     """Simplest translation"""
     words = english.lower().translate(str.maketrans("", "", punctuation)).split()
@@ -19,10 +21,8 @@ def simple_undo(pl):
 
 def full_translation(english):
     """More advanced and correct translation"""
-    # TODO: go from full pl back to english
     words = english.lower().split()
     vowels = "AaEeIiOoUu"
-    ending_punct = ".?!"
     pig_latin = []
     cap_next = True
     for word in words:
@@ -48,6 +48,18 @@ def full_translation(english):
         cap_next = plw[-1] in ending_punct
         pig_latin += [plw]
     return " ".join(pig_latin)
+
+def full_undo(pl):
+    """Undoing full translation;
+    Fails when translating back English words starting with multiple consonants"""
+    words = pl.split()
+    english = []
+    for word in words:
+        if word[-3:] == "way":
+            english += [word[:-3]]
+        else:
+            english += [word[-3] + word[:-3]]
+    return "".join(english)
 
 if __name__ == "__main__": # pragma: no cover
     main({

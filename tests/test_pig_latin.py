@@ -23,10 +23,10 @@ class PigLatinTestCase(unittest.TestCase):
     para_en = "Pig, eat. Smile? It's easy!"
     para_pl = "Igpay, eatway. Ilesmay? It'sway easyway!"
 
-    def help_test(self, fun, english, translated):
+    def help_test(self, fun, raw, translated):
         """Helper for most tests"""
-        for i, en in enumerate(english):
-            self.assertEqual(fun(en).lower(), translated[i].lower())
+        for i, r in enumerate(raw):
+            self.assertEqual(fun(r).lower(), translated[i].lower())
 
     def test_simple_con(self):
         """Basic functionality of simple function"""
@@ -37,9 +37,8 @@ class PigLatinTestCase(unittest.TestCase):
         self.assertEqual(pig_latin.simple_translate(punctuation), "")
 
     def test_undo_con(self):
-        """Basic functionality of undo function"""
-        for word in self.con_en:
-            self.assertEqual(word, pig_latin.simple_undo(pig_latin.simple_translate(word)))
+        """Basic functionality of simple_undo function"""
+        self.help_test(pig_latin.simple_undo, self.con_pl, self.con_en)
 
     def test_full_con(self):
         """Basic functionality of full function"""
@@ -60,6 +59,19 @@ class PigLatinTestCase(unittest.TestCase):
     def test_full_para(self):
         """Paragraph functionality of full function"""
         self.assertEqual(pig_latin.full_translation(self.para_en), self.para_pl)
+
+    def test_full_undo(self):
+        """Basic functionality of full_undo"""
+        self.help_test(pig_latin.full_undo, self.con_pl, self.con_en)
+
+    def test_full_undo_ccl(self):
+        """Consonant clusters passed to full_undo will not translate correctly"""
+        for word in self.ccl_en:
+            self.assertNotEqual(word, pig_latin.full_undo(pig_latin.full_translation(word)))
+
+    def test_full_undo_vow(self):
+        """Vowel functionality of full_undo"""
+        self.help_test(pig_latin.full_undo, self.vow_pl, self.vow_en)
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
