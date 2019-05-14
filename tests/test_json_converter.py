@@ -19,10 +19,12 @@ class JSONConverterTestCase(unittest.TestCase):
 
     def test_list(self):
         """List functionality"""
+        self.assertEqual(rprint([]), "[]")
         self.assertEqual(rprint(["aichner", "barthel"]), '[\n    "aichner",\n    "barthel"\n]')
 
     def test_dict(self):
         """Dict functionality"""
+        self.assertEqual(rprint({}), "{}")
         self.assertEqual(rprint({"lorcan": 1, "birch": 2}),\
             '{\n    "lorcan": 1,\n    "birch": 2\n}')
 

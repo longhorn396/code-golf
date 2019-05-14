@@ -17,6 +17,8 @@ def rprint(obj, tabs=0):
         return parsed[:last_comma_index] + parsed[last_comma_index + 1:]
     parsed = ""
     if isinstance(obj, dict):
+        if not obj:
+            return "{}"
         tabs += 1
         parsed += "{\n"
         for k, v in obj.items():
@@ -25,6 +27,8 @@ def rprint(obj, tabs=0):
         parsed += "".join(["    "] * tabs) + "}"
         parsed = remove_last_comma(parsed)
     elif isinstance(obj, list):
+        if not obj:
+            return "[]"
         tabs += 1
         parsed = "[\n"
         for i in obj:
