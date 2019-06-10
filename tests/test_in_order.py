@@ -14,3 +14,6 @@ class InOrderTestCase(unittest.TestCase):
         self.assertEqual(in_order("baton"), "baton - not in order")
         self.assertEqual(in_order("biopsy billowy chef"),
                          "biopsy - in order billowy - in order chef - not in order")
+
+if __name__ == "__main__": # pragma: no cover
+    unittest.main()
