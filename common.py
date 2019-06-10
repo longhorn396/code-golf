@@ -25,16 +25,15 @@ def main(fun, trans, *prompts): # pragma: no cover
     except AssertionError:
         print("Make sure you pass in valid arguments")
 
-def compare_subfs(funs, tries): # pragma: no cover
+def compare_subfs(funs, args, attempts): # pragma: no cover
     """Compares the execution times of functions in this module"""
     from timeit import default_timer as timer
     spaces = max([len(s) for s in funs.keys()])
     times = {s: 0 for s in funs.keys()}
-    attempts = int(input("Attempts:\n"))
     for _ in range(attempts):
         for s, f in funs.items():
             time = -timer()
-            f(tries)
+            f(args)
             time += timer()
             times[s] += time / attempts
     return "".join([f"{s: <{spaces}} average: {t:.15f}\n" for s, t in times.items()])
@@ -55,8 +54,7 @@ def main_subf(funs, trans, check, *prompts): # pragma: no cover
             args = [trans(input(p + ":\n")) for p in prompts]
         if all([check(arg) for arg in args]):
             if subf == "compare":
-                comp_fun = funs.pop("compare")
-                print(comp_fun(funs, *args))
+                print(funs.pop("compare")(funs, *args, int(input("Attempts:\n"))))
             else:
                 print(funs[subf](*args))
         else:

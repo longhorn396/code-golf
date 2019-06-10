@@ -65,4 +65,4 @@ if __name__ == "__main__": #pragma: no cover
         "reduce1": reduce1_factorial,
         "reduce2": reduce2_factorial,
         "compare": compare
-    }, int, lambda x: x >= 0, "Number")
+    }, int, lambda x: 0 <= x < 996, "Number")
