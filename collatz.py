@@ -174,9 +174,7 @@ def collatz_eval(i, j):
     if i == j:
         return collatz_cycle(i)
     if i > j:
-        i = i ^ j
-        j = i ^ j
-        i = i ^ j
+        i, j = (j, i)
     m = j // 2 + 1
     if i < m:
         i = m
@@ -205,4 +203,4 @@ def collatz_cycle(n):
     return collatz_cycle(n + (n >> 1) + 1) + 2
 
 if __name__ == "__main__": # pragma: no cover
-    main(collatz_eval, int, "Beginning of range:", "End of range:")
+    main(collatz_eval, int, "Beginning of range", "End of range")
