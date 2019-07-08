@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Evauate strings for alphabetical order"""
+"""Evaluate strings for alphabetical order"""
 
 from string import ascii_lowercase
 from common import main

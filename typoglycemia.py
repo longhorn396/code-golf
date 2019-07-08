@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Typoglycemia is the mind's ability to deciper a mispelled word if the
+"""Typoglycemia is the mind's ability to decipher a misspelled word if the
 first and last letters of the word are correct"""
 
 from random import shuffle

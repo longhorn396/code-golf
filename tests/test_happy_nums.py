@@ -8,7 +8,7 @@ from happy_nums import search, is_happy
 class HappyNumsTestCase(unittest.TestCase):
     """Unit tests for happy_nums.py"""
 
-    def test_happyiness(self):
+    def test_happiness(self):
         """is_happy test"""
         nums = [7, 13, 69, 420]
         results = [True, True, False, False]

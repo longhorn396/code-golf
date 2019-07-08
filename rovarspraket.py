@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Sweedish term that translates to "Robber's Language";
+"""Swedish term that translates to "Robber's Language";
 Consonats are doubled with an "o" between them"""
 
 from common import main_subf as main

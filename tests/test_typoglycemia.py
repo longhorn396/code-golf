@@ -14,7 +14,7 @@ class TypoglycemiaTestCase(unittest.TestCase):
 
     def test_typoglycemia(self):
         """typoglycemia test"""
-        typo = typoglycemia("I deciphered a mispelled word")
+        typo = typoglycemia("I deciphered a misspelled word")
         self.assertEqual(len(typo), 29)
         self.assertEqual(len(typo.split(" ")), 5)
         self.assertTrue(typo.startswith("I d"))

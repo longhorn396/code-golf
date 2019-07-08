@@ -9,7 +9,7 @@ class JSONConverterTestCase(unittest.TestCase):
     """Unit tests for json_converter.py; Tests inspired by wrestlers in:
     https://en.wikipedia.org/wiki/Dusty_Rhodes_Tag_Team_Classic#2019_tournament"""
 
-    def test_primatives(self):
+    def test_primitives(self):
         """Primitive JSON types"""
         self.assertEqual(rprint(False), "false")
         self.assertEqual(rprint(True), "true")
