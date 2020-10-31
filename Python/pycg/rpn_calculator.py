@@ -14,7 +14,7 @@ ops = {
     "%": mod
 }
 
-def iterative(stack):
+def iterative_rpn(stack):
     """Iterative solution"""
     operands = []
     for item in stack.split():
@@ -25,19 +25,19 @@ def iterative(stack):
     assert len(operands) == 1
     return operands.pop()
 
-def recursive_wrap(stack):
-    """Wrapper for recursive recursive solution"""
-    return recursive(stack.split())
+def recursive_rpn_wrap(stack):
+    """Wrapper for recursive solution"""
+    return recursive_rpn(stack.split())
 
-def recursive(stack):
-    """recursive recursive solution"""
+def recursive_rpn(stack):
+    """Recursive solution"""
     item = stack.pop()
     if item.isnumeric():
         return int(item)
-    return ops[item](recursive(stack), recursive(stack))
+    return ops[item](recursive_rpn(stack), recursive_rpn(stack))
 
 if __name__ == "__main__": # pragma: no cover
     main({
-        "for_loop": iterative,
-        "recursive": recursive_wrap,
+        "for_loop": iterative_rpn,
+        "recursive": recursive_rpn_wrap,
         "compare": compare}, str, lambda x: True, "RPN Stack")

@@ -12,6 +12,6 @@ from .json_converter import py_to_js, rprint
 from .natural_nums import find_nth_natural_number
 from .pig_latin import simple_translate, simple_undo, full_translation, full_undo
 from .rovarspraket import rovarspraket, undo
-from .rpn_calculator import iterative, recursive_wrap, recursive
+from .rpn_calculator import iterative_rpn, recursive_rpn_wrap, recursive_rpn
 from .swap import temp_swap, temp2_swap, tuple_swap, return_swap, xor_swap
 from .typoglycemia import typoglycemia
