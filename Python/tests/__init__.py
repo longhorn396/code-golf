@@ -1,3 +1,5 @@
+"""Import testable code from pycg package"""
+
 import os
 import sys
 PROJECT_PATH = os.getcwd()

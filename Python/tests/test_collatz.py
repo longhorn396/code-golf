@@ -5,7 +5,7 @@
 import unittest
 import pycg
 
-class collatzTestCase(unittest.TestCase):
+class CollatzTestCase(unittest.TestCase):
     """Unit tests for collatz.py"""
 
     def test_eval(self):

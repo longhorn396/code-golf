@@ -5,14 +5,14 @@
 import unittest
 import pycg
 
-class swapTestCase(unittest.TestCase):
+class SwapTestCase(unittest.TestCase):
     """Unit tests for swap.py"""
 
     def test_swaps(self):
         """Test for the swap algos"""
-        x, y = 5641, 74351
-        funs = [pycg.temp_swap, pycg.temp2_swap, pycg.tuple_swap, pycg.return_swap, pycg.xor_swap]
-        self.assertTrue(all([fun(x, y) == (y, x) for fun in funs]))
+        i, j = 5641, 74351
+        subfs = [pycg.temp_swap, pycg.temp2_swap, pycg.tuple_swap, pycg.return_swap, pycg.xor_swap]
+        self.assertTrue(all([fun(i, j) == (j, i) for fun in subfs]))
 
 if __name__ == "__main__": # pragma: no cover
     unittest.main()

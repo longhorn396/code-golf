@@ -25,8 +25,8 @@ class PigLatinTestCase(unittest.TestCase):
 
     def help_test(self, fun, raw, translated):
         """Helper for most tests"""
-        for i, r in enumerate(raw):
-            self.assertEqual(fun(r).lower(), translated[i].lower())
+        for i, text in enumerate(raw):
+            self.assertEqual(fun(text).lower(), translated[i].lower())
 
     def test_simple_con(self):
         """Basic functionality of simple function"""

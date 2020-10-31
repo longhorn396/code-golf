@@ -5,7 +5,7 @@
 import unittest
 import pycg
 
-class coin_flipTestCase(unittest.TestCase):
+class CoinFlipTestCase(unittest.TestCase):
     """Unit tests for coin_flip.py"""
 
     def _helper(self, result):
