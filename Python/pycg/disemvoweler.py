@@ -5,14 +5,14 @@
 from string import ascii_letters
 from .common import main
 
-def disemvowel(s):
+def disemvowel(text):
     """Separate the vowels and consonants of a string"""
     cons, vows = "", ""
-    for c in s:
-        if c in "aeiouAEIOU":
-            vows += c
-        elif c in ascii_letters:
-            cons += c
+    for character in text:
+        if character in "aeiouAEIOU":
+            vows += character
+        elif character in ascii_letters:
+            cons += character
     return f"{cons} {vows}"
 
 if __name__ == "__main__": # pragma: no cover

@@ -12,11 +12,10 @@ def in_order(words):
 
 def w_in_order(word):
     """Evaluate if the characters in `word` are in alphabetical order"""
-    for i, c in enumerate(word.lower()[:len(word) - 1]):
-        if c in ascii_lowercase and c <= word[i + 1]:
+    for i, character in enumerate(word.lower()[:len(word) - 1]):
+        if character in ascii_lowercase and character <= word[i + 1]:
             continue
-        else:
-            return False
+        return False
     return True
 
 if __name__ == "__main__": # pragma: no cover

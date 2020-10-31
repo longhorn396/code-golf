@@ -6,17 +6,17 @@ Rules obtained from https://en.wikipedia.org/wiki/Pig_Latin#Rules"""
 from string import punctuation
 from .common import main_subf as main
 
-ending_punct = ".?!"
+ENDING_PUNCTUATION = ".?!"
 
 def simple_translate(english):
     """Simplest translation"""
     words = english.lower().translate(str.maketrans("", "", punctuation)).split()
     return " ".join([word[1:] + word[0] + "ay" for word in words])
 
-def simple_undo(pl):
+def simple_undo(pig_latin):
     """Undoing simplest translation"""
-    pl += " "
-    words = pl.split("ay ")
+    pig_latin += " "
+    words = pig_latin.split("ay ")
     return " ".join([word[-1] + word[:-1] for word in words[:-1]])
 
 def full_translation(english):
@@ -45,14 +45,14 @@ def full_translation(english):
         if cap_next:
             plw = plw[0].upper() + plw[1:]
             cap_next = False
-        cap_next = plw[-1] in ending_punct
+        cap_next = plw[-1] in ENDING_PUNCTUATION
         pig_latin += [plw]
     return " ".join(pig_latin)
 
-def full_undo(pl):
+def full_undo(pig_latin):
     """Undoing full translation;
     Fails when translating back English words starting with multiple consonants"""
-    words = pl.split()
+    words = pig_latin.split()
     english = []
     for word in words:
         if word[-3:] == "way":

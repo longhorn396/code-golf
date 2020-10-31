@@ -21,8 +21,9 @@ def rprint(obj, tabs=0):
             return "{}"
         tabs += 1
         parsed += "{\n"
-        for k, v in obj.items():
-            parsed += "".join(["    "] * tabs) + rprint(k, tabs) + ": " + rprint(v, tabs) + ",\n"
+        for key, value in obj.items():
+            parsed += "".join(["    "] * tabs) + rprint(key, tabs) + ": " + rprint(value, tabs)\
+                + ",\n"
         tabs -= 1
         parsed += "".join(["    "] * tabs) + "}"
         parsed = remove_last_comma(parsed)

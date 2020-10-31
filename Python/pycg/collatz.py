@@ -170,37 +170,37 @@ meta_cache.update(post_local_maxima)
 
 def collatz_eval(i, j):
     """Return the max cycle length of the range [i, j]"""
-    mcl = 0
+    max_cycle_len = 0
     if i == j:
         return collatz_cycle(i)
     if i > j:
         i, j = (j, i)
-    m = j // 2 + 1
-    if i < m:
-        i = m
+    midpoint = j // 2 + 1
+    if i < midpoint:
+        i = midpoint
     for k in range(j, i + 1, -1):
         if k in local_maxima:
             return local_maxima[k]
-    for n in range(i, j + 1):
-        assert n > 0
-        if n in meta_cache:
-            c = meta_cache[n]
+    for value in range(i, j + 1):
+        assert value > 0
+        if value in meta_cache:
+            cycle_len = meta_cache[value]
         else:
-            c = collatz_cycle(n)
-            meta_cache[n] = c
-        if c > mcl:
-            mcl = c
-        assert c > 0
-    assert mcl > 0
-    return mcl
+            cycle_len = collatz_cycle(value)
+            meta_cache[value] = cycle_len
+        if cycle_len > max_cycle_len:
+            max_cycle_len = cycle_len
+        assert cycle_len > 0
+    assert max_cycle_len > 0
+    return max_cycle_len
 
-def collatz_cycle(n):
+def collatz_cycle(value):
     """Recursively compute the collatz cycle length"""
-    if n in meta_cache:
-        return meta_cache[n]
-    if (n % 2) == 0:
-        return collatz_cycle(n // 2) + 1
-    return collatz_cycle(n + (n >> 1) + 1) + 2
+    if value in meta_cache:
+        return meta_cache[value]
+    if (value % 2) == 0:
+        return collatz_cycle(value // 2) + 1
+    return collatz_cycle(value + (value >> 1) + 1) + 2
 
 if __name__ == "__main__": # pragma: no cover
     main(collatz_eval, int, "Beginning of range", "End of range")

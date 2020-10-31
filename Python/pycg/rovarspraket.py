@@ -7,14 +7,14 @@ from .common import main_subf as main
 
 def rovarspraket(english):
     """Translates input to rovarspraket"""
-    for l, u in zip("bcdfghjklmnpqrstvwxyz", "BCDFGHJKLMNPQRSTVWXYZ"):
-        english = f"{u}o{l}".join(f"{l}o{l}".join(english.split(l)).split(u))
+    for low, upper in zip("bcdfghjklmnpqrstvwxyz", "BCDFGHJKLMNPQRSTVWXYZ"):
+        english = f"{upper}o{low}".join(f"{low}o{low}".join(english.split(low)).split(upper))
     return english
 
 def undo(rovar):
     """Translates rovarspraket into english"""
-    for l, u in zip("bcdfghjklmnpqrstvwxyz", "BCDFGHJKLMNPQRSTVWXYZ"):
-        rovar = f"{u}".join(f"{l}".join(rovar.split(f"{l}o{l}")).split(f"{u}o{l}"))
+    for low, upper in zip("bcdfghjklmnpqrstvwxyz", "BCDFGHJKLMNPQRSTVWXYZ"):
+        rovar = f"{upper}".join(f"{low}".join(rovar.split(f"{low}o{low}")).split(f"{upper}o{low}"))
     return rovar
 
 if __name__ == "__main__": # pragma: no cover

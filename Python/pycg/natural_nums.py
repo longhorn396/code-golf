@@ -4,22 +4,22 @@
 
 from .common import main
 
-def find_nth_natural_number(n, limit):
-    """Returns the nth natural number and the number containing it"""
-    assert n >= 1
-    m = {}
+def find_nth_natural_number(i, limit):
+    """Returns the ith natural number and the number containing it"""
+    assert i >= 1
+    number_map = {}
     nums = []
     prev_len = 0
-    for i in range(1, limit + 1):
-        nums.append(i)
-        new_len = len(str(i)) + prev_len
-        m.update({j: (prev_len, new_len) for j in range(prev_len + 1, new_len + 1)})
-        if new_len >= n:
+    for num in range(1, limit + 1):
+        nums.append(num)
+        new_len = len(str(num)) + prev_len
+        number_map.update({j: (prev_len, new_len) for j in range(prev_len + 1, new_len + 1)})
+        if new_len >= i:
             break
         prev_len = new_len
-    res_str = "".join(str(i) for i in nums)
-    assert n <= len(res_str)
-    return f"The natural number is {res_str[n-1]} in {res_str[m[n][0]:m[n][1]]}"
+    res_str = "".join(str(num) for num in nums)
+    assert i <= len(res_str)
+    return f"The natural number is {res_str[i-1]} in {res_str[number_map[i][0]:number_map[i][1]]}"
 
 if __name__ == "__main__": # pragma: no cover
     main(find_nth_natural_number, int, "Which natural number?", "How big a range?")

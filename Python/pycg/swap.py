@@ -6,34 +6,34 @@ I was under the impression that swapping with xor was the fastest and wrote this
 from .common import main_subf as main
 from .common import compare_subfs as compare
 
-def temp_swap(x, y):
+def temp_swap(i, j):
     """Swap with a temp variable"""
-    temp = x # pylint: disable=consider-swap-variables
-    x = y
-    y = temp
-    return x, y
+    temp = i # pylint: disable=consider-swap-variables
+    i = j
+    j = temp
+    return i, j
 
-def temp2_swap(x, y):
+def temp2_swap(i, j):
     """temp_swap with one less assignment"""
-    temp = x
-    x = y
-    return x, temp
+    temp = i
+    i = j
+    return i, temp
 
-def tuple_swap(x, y):
+def tuple_swap(i, j):
     """Swap with tuple unpacking"""
-    (x, y) = (y, x)
-    return x, y
+    (i, j) = (j, i)
+    return i, j
 
-def return_swap(x, y):
+def return_swap(i, j):
     """Swap with tuple unpacking on return"""
-    return y, x
+    return j, i
 
-def xor_swap(x, y):
+def xor_swap(i, j):
     """Swap with exclusive or"""
-    x = x ^ y
-    y = x ^ y
-    x = x ^ y
-    return x, y
+    i = i ^ j
+    j = i ^ j
+    i = i ^ j
+    return i, j
 
 if __name__ == "__main__": # pragma: no cover
     main({

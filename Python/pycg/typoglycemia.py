@@ -6,10 +6,10 @@ first and last letters of the word are correct"""
 from random import shuffle
 from .common import main
 
-def typoglycemia(s):
+def typoglycemia(text):
     """Randomizes the internal characters of a string"""
     new_sentence = []
-    for word in s.split():
+    for word in text.split():
         if len(word) < 4 or "'" in word:
             new_sentence += [word]
         else:
