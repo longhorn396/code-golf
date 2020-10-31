@@ -3,7 +3,7 @@
 """Disemvowel strings"""
 
 from string import ascii_letters
-from common import main
+from .common import main
 
 def disemvowel(s):
     """Separate the vowels and consonants of a string"""

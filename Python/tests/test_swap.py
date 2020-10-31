@@ -3,7 +3,7 @@
 """Test module for swap.py"""
 
 import unittest
-from swap import temp_swap, temp2_swap, tuple_swap, return_swap, xor_swap
+import pycg
 
 class swapTestCase(unittest.TestCase):
     """Unit tests for swap.py"""
@@ -11,7 +11,7 @@ class swapTestCase(unittest.TestCase):
     def test_swaps(self):
         """Test for the swap algos"""
         x, y = 5641, 74351
-        funs = [temp_swap, temp2_swap, tuple_swap, return_swap, xor_swap]
+        funs = [pycg.temp_swap, pycg.temp2_swap, pycg.tuple_swap, pycg.return_swap, pycg.xor_swap]
         self.assertTrue(all([fun(x, y) == (y, x) for fun in funs]))
 
 if __name__ == "__main__": # pragma: no cover

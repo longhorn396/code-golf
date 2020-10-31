@@ -2,7 +2,7 @@
 
 """Finds the nth natural number"""
 
-from common import main
+from .common import main
 
 def find_nth_natural_number(n, limit):
     """Returns the nth natural number and the number containing it"""

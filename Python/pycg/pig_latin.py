@@ -4,7 +4,7 @@
 Rules obtained from https://en.wikipedia.org/wiki/Pig_Latin#Rules"""
 
 from string import punctuation
-from common import main_subf as main
+from .common import main_subf as main
 
 ending_punct = ".?!"
 

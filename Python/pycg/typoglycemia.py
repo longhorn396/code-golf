@@ -4,7 +4,7 @@
 first and last letters of the word are correct"""
 
 from random import shuffle
-from common import main
+from .common import main
 
 def typoglycemia(s):
     """Randomizes the internal characters of a string"""

@@ -2,8 +2,8 @@
 
 """Computes the fibonacci sequence to the nth number and compares compute time across algorithms"""
 
-from common import main_subf as main
-from common import compare_subfs as compare
+from .common import main_subf as main
+from .common import compare_subfs as compare
 
 def dumb_fibonacci(n, seq=None):
     """Dumb solution"""

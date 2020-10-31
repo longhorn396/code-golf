@@ -8,7 +8,7 @@ clean:
 	@rm -rf tests/__pycache__
 
 lint:
-	-pylint *.py
+	-pylint pycg/*.py
 	-pylint tests/*.py
 
 coverage:
@@ -18,8 +18,8 @@ coverage:
 test:
 	python3 -m unittest discover tests
 
-image:
-	docker build -t pycg .
+# image:
+# 	docker build -t pycg .
 
-docker:
-	docker run --rm -it -v c:/Users/ddrawhor/Documents/Code\ Golf:/data -w /data pycg
+# docker:
+# 	docker run --rm -it -v c:/Users/ddrawhor/Documents/Code\ Golf:/data -w /data pycg

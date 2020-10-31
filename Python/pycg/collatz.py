@@ -3,7 +3,7 @@
 """Revamped collatz code from Prof. Downing's CS 373 project"""
 
 import copy
-from common import main
+from .common import main
 
 # Local maxima of max-cycle-length from 1 to 1,000,000
 local_maxima = {

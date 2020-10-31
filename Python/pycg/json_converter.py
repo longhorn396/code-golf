@@ -4,7 +4,7 @@
 Useful when building AWS Lambda functions"""
 
 from ast import literal_eval
-from common import main
+from .common import main
 
 def py_to_js(obj_str):
     """Evaluate string and return readable result"""

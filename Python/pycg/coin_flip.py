@@ -5,8 +5,8 @@
 from random import choice
 from functools import reduce
 from operator import add
-from common import main_subf as main
-from common import compare_subfs as compare
+from .common import main_subf as main
+from .common import compare_subfs as compare
 
 def output_results(results, way):
     """Helper method with most of the logic"""

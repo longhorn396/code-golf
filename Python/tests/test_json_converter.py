@@ -3,7 +3,7 @@
 """Test module for json_converter.py"""
 
 import unittest
-from json_converter import rprint, py_to_js
+import pycg
 
 class JSONConverterTestCase(unittest.TestCase):
     """Unit tests for json_converter.py; Tests inspired by wrestlers in:
@@ -11,26 +11,26 @@ class JSONConverterTestCase(unittest.TestCase):
 
     def test_primitives(self):
         """Primitive JSON types"""
-        self.assertEqual(rprint(False), "false")
-        self.assertEqual(rprint(True), "true")
-        self.assertEqual(rprint(0), "0")
-        self.assertEqual(rprint(3.14), "3.14")
-        self.assertEqual(rprint("testing"), '"testing"')
+        self.assertEqual(pycg.rprint(False), "false")
+        self.assertEqual(pycg.rprint(True), "true")
+        self.assertEqual(pycg.rprint(0), "0")
+        self.assertEqual(pycg.rprint(3.14), "3.14")
+        self.assertEqual(pycg.rprint("testing"), '"testing"')
 
     def test_list(self):
         """List functionality"""
-        self.assertEqual(rprint([]), "[]")
-        self.assertEqual(rprint(["aichner", "barthel"]), '[\n    "aichner",\n    "barthel"\n]')
+        self.assertEqual(pycg.rprint([]), "[]")
+        self.assertEqual(pycg.rprint(["aichner", "barthel"]), '[\n    "aichner",\n    "barthel"\n]')
 
     def test_dict(self):
         """Dict functionality"""
-        self.assertEqual(rprint({}), "{}")
-        self.assertEqual(rprint({"lorcan": 1, "birch": 2}),\
+        self.assertEqual(pycg.rprint({}), "{}")
+        self.assertEqual(pycg.rprint({"lorcan": 1, "birch": 2}),\
             '{\n    "lorcan": 1,\n    "birch": 2\n}')
 
     def test_tuple(self):
         """Tuples are not allowed"""
-        self.assertRaises(Exception, rprint, ("blake", "cutler", "ryker"))
+        self.assertRaises(Exception, pycg.rprint, ("blake", "cutler", "ryker"))
 
     def test_nests(self):
         """Nested lists and objects"""
@@ -84,14 +84,14 @@ class JSONConverterTestCase(unittest.TestCase):
         }
     ]
 }"""
-        self.assertEqual(rprint(undisputed), parsed)
+        self.assertEqual(pycg.rprint(undisputed), parsed)
 
     def test_py_to_js(self):
         """Testing wrapper function"""
         diy = '{"Name":"#DIY", "Members":["Gargano", "Ciampa"]}'
         parsed = '{\n    "Name": "#DIY",\n    "Members": [\n        "Gargano",\n' +\
         '        "Ciampa"\n    ]\n}'
-        self.assertEqual(py_to_js(diy), parsed)
+        self.assertEqual(pycg.py_to_js(diy), parsed)
 
 if __name__ == "__main__": # pragma: no cover
     unittest.main()

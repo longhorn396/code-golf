@@ -3,7 +3,7 @@
 """Swedish term that translates to "Robber's Language";
 Consonats are doubled with an "o" between them"""
 
-from common import main_subf as main
+from .common import main_subf as main
 
 def rovarspraket(english):
     """Translates input to rovarspraket"""

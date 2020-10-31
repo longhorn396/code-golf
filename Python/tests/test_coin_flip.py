@@ -3,7 +3,7 @@
 """Test module for coin_flip.py"""
 
 import unittest
-from coin_flip import coin_flip_sequence_reduce, coin_flip_sequence_sum
+import pycg
 
 class coin_flipTestCase(unittest.TestCase):
     """Unit tests for coin_flip.py"""
@@ -16,11 +16,11 @@ class coin_flipTestCase(unittest.TestCase):
 
     def test_reduce(self):
         """Test for the reduce algo"""
-        self._helper(coin_flip_sequence_reduce(5))
+        self._helper(pycg.coin_flip_sequence_reduce(5))
 
     def test_sum(self):
         """Test for the sum algo"""
-        self._helper(coin_flip_sequence_sum(5))
+        self._helper(pycg.coin_flip_sequence_sum(5))
 
 if __name__ == "__main__": # pragma: no cover
     unittest.main()

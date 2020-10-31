@@ -5,7 +5,7 @@ Examples obtained from https://en.wikipedia.org/wiki/Pig_Latin#Rules"""
 
 import unittest
 from string import punctuation
-import pig_latin
+import pycg
 
 class PigLatinTestCase(unittest.TestCase):
     """Unit tests for pig_latin.py"""
@@ -30,48 +30,48 @@ class PigLatinTestCase(unittest.TestCase):
 
     def test_simple_con(self):
         """Basic functionality of simple function"""
-        self.help_test(pig_latin.simple_translate, self.con_en, self.con_pl)
+        self.help_test(pycg.simple_translate, self.con_en, self.con_pl)
 
     def test_simple_punct(self):
         """Functionality of punctuation in the simple function"""
-        self.assertEqual(pig_latin.simple_translate(punctuation), "")
+        self.assertEqual(pycg.simple_translate(punctuation), "")
 
     def test_undo_con(self):
         """Basic functionality of simple_undo function"""
-        self.help_test(pig_latin.simple_undo, self.con_pl, self.con_en)
+        self.help_test(pycg.simple_undo, self.con_pl, self.con_en)
 
     def test_full_con(self):
         """Basic functionality of full function"""
-        self.help_test(pig_latin.full_translation, self.con_en, self.con_pl)
+        self.help_test(pycg.full_translation, self.con_en, self.con_pl)
 
     def test_full_ccl(self):
         """Beginning consonant cluster functionality of full function"""
-        self.help_test(pig_latin.full_translation, self.ccl_en, self.ccl_pl)
+        self.help_test(pycg.full_translation, self.ccl_en, self.ccl_pl)
 
     def test_full_vow(self):
         """Beginning vowel functionality of full function"""
-        self.help_test(pig_latin.full_translation, self.vow_en, self.vow_pl)
+        self.help_test(pycg.full_translation, self.vow_en, self.vow_pl)
 
     def test_full_punct(self):
         """Functionality of punctuation in the full function"""
-        self.assertEqual(pig_latin.full_translation(punctuation), punctuation)
+        self.assertEqual(pycg.full_translation(punctuation), punctuation)
 
     def test_full_para(self):
         """Paragraph functionality of full function"""
-        self.assertEqual(pig_latin.full_translation(self.para_en), self.para_pl)
+        self.assertEqual(pycg.full_translation(self.para_en), self.para_pl)
 
     def test_full_undo(self):
         """Basic functionality of full_undo"""
-        self.help_test(pig_latin.full_undo, self.con_pl, self.con_en)
+        self.help_test(pycg.full_undo, self.con_pl, self.con_en)
 
     def test_full_undo_ccl(self):
         """Consonant clusters passed to full_undo will not translate correctly"""
         for word in self.ccl_en:
-            self.assertNotEqual(word, pig_latin.full_undo(pig_latin.full_translation(word)))
+            self.assertNotEqual(word, pycg.full_undo(pycg.full_translation(word)))
 
     def test_full_undo_vow(self):
         """Vowel functionality of full_undo"""
-        self.help_test(pig_latin.full_undo, self.vow_pl, self.vow_en)
+        self.help_test(pycg.full_undo, self.vow_pl, self.vow_en)
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()

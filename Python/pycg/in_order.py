@@ -3,7 +3,7 @@
 """Evaluate strings for alphabetical order"""
 
 from string import ascii_lowercase
-from common import main
+from .common import main
 
 def in_order(words):
     """Wrapper for each word in `words`"""

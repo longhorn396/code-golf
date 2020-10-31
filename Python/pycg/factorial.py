@@ -5,8 +5,8 @@
 from math import factorial as imported
 from functools import reduce
 from operator import mul
-from common import main_subf as main
-from common import compare_subfs as compare
+from .common import main_subf as main
+from .common import compare_subfs as compare
 
 def for_factorial(num):
     """Iterative solution"""

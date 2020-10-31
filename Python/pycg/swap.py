@@ -3,8 +3,8 @@
 """Different ways to swap numbers.
 I was under the impression that swapping with xor was the fastest and wrote this to test"""
 
-from common import main_subf as main
-from common import compare_subfs as compare
+from .common import main_subf as main
+from .common import compare_subfs as compare
 
 def temp_swap(x, y):
     """Swap with a temp variable"""

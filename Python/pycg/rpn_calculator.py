@@ -3,8 +3,8 @@
 """Simple Reverse Polish Notation calculators"""
 
 from operator import add, sub, mul, floordiv, mod
-from common import main_subf as main
-from common import compare_subfs as compare
+from .common import main_subf as main
+from .common import compare_subfs as compare
 
 ops = {
     "+": add,
