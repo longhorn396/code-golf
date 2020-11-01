@@ -1,0 +1,20 @@
+{
+  "name": "jscg",
+  "version": "0.0.1",
+  "description": "Short challenges, puzzles, and comparisons written in Typescript/Javascript for when I have free time",
+  "main": "",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -r dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longhorn396/code-golf.git"
+  },
+  "author": "Devin Drawhorn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/longhorn396/code-golf/issues"
+  },
+  "homepage": "https://github.com/longhorn396/code-golf#readme"
+}

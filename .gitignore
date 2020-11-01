@@ -1,4 +1,10 @@
+# Project-wide
 notes/
 .vscode/
+
+#Node.js
+dist/
+
+#Python
 __pycache__
 .coverage
