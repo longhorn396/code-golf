@@ -4,6 +4,7 @@ notes/
 
 #Node.js
 dist/
+node_modules/
 
 #Python
 __pycache__

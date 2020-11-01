@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/longhorn396/code-golf/issues"
   },
-  "homepage": "https://github.com/longhorn396/code-golf#readme"
+  "homepage": "https://github.com/longhorn396/code-golf#readme",
+  "dependencies": {
+    "@types/inquirer": "^7.3.1",
+    "@types/node": "^14.14.6",
+    "inquirer": "^7.3.3"
+  }
 }
