@@ -1,5 +1,4 @@
-import { exit } from 'process';
-import { main, toString } from './common';
+import { main, toString, stringPromptResults } from './common';
 
 export const inOrder = (text: string): string => {
     const results: string[] = text.split(" ").map((word: string) => {
@@ -22,4 +21,4 @@ export const wordInOrder = (word: string): boolean => {
     return true;
 };
 
-main(inOrder, toString, "What word(s)?");
+main(inOrder, toString, stringPromptResults, "What word(s)?");
