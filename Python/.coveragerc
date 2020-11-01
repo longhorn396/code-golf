@@ -1,7 +1,12 @@
 [run]
 branch = True
-omit = common.py
+omit =
+    pycg/__init__.py
+    pycg/common.py
 
 [report]
 show_missing = True
-omit = tests/*
+omit = 
+    tests/*
+    pycg/__init__.py
+    pycg/common.py
