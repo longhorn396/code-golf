@@ -1,4 +1,4 @@
-import { main, toString, stringPromptResults } from './common';
+import { main, ArgType } from './common';
 
 export const inOrder = (text: string): string => {
     const results: string[] = text.split(" ").map((word: string) => {
@@ -21,4 +21,4 @@ export const wordInOrder = (word: string): boolean => {
     return true;
 };
 
-main(inOrder, toString, stringPromptResults, "What word(s)?");
+main(inOrder, ArgType.STRING, "What word(s)?");
