@@ -1,16 +1,15 @@
-import { main, ArgType } from './common';
+import { ArgType, mainSubf as main } from './common';
 
-export const inOrder = (text: string): string => {
+export const inOrderBranchPrediction = (text: string): string => {
     const results: string[] = text.split(" ").map((word: string) => {
-        const order: boolean = wordInOrder(word);
+        const order: boolean = wordInOrderBranchPrediction(word);
         const result: string = `${word} -${order ? '' : ' not'} in order`;
         return result;
     });
     return results.join("\n");
 };
 
-// TODO: branch prediction vs simplicity?
-export const wordInOrder = (word: string): boolean => {
+export const wordInOrderBranchPrediction = (word: string): boolean => {
     const characters = word.split("");
     for (let i = 0; i < characters.length - 1; i++) {
         if (characters[i] <= characters[i + 1]) {
@@ -21,4 +20,26 @@ export const wordInOrder = (word: string): boolean => {
     return true;
 };
 
-main(inOrder, ArgType.STRING, "What word(s)?");
+export const inOrderReadability = (text: string): string => {
+    const results: string[] = text.split(" ").map((word: string) => {
+        const order: boolean = wordInOrderReadability(word);
+        const result: string = `${word} -${order ? '' : ' not'} in order`;
+        return result;
+    });
+    return results.join("\n");
+};
+
+export const wordInOrderReadability = (word: string): boolean => {
+    const characters = word.split("");
+    for (let i = 0; i < characters.length - 1; i++) {
+        if (characters[i] > characters[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+};
+
+main({
+    branchPrediction: inOrderBranchPrediction,
+    readability: inOrderReadability
+}, ArgType.STRING, (value: string) => value.length, "What word(s)?");
