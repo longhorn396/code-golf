@@ -34,6 +34,27 @@ export const main = (fun: Function, argType: ArgType, ...prompts: string[]) => {
     }
 };
 
+export const compareSubfs = (funs: any, attempts: number, args: any[]): string => {
+    const subfNames: string[] = Object.keys(funs);
+    const spaces: number = Math.max(...subfNames.map((fun: string) => fun.length));
+    let times: any[] = subfNames.map((subfName: string) => {
+        return { name: subfName, fun: funs[subfName] };
+    });
+    let timesMap: any = {};
+    for (let i = 0; i < attempts; i++) {
+        for (let j = 0; j < times.length; j++) {
+            const { fun, name } = times[j];
+            let time: number = timesMap[name] ? timesMap[name] : 0;
+            time -= Date.now();
+            fun(...args);
+            time += Date.now();
+            timesMap[name] = time;
+        }
+    }
+    const results: string[] = times.map((result: any) => `${result.name.padEnd(spaces)} average: ${(timesMap[result.name]/attempts).toFixed(15)}`)
+    return results.join("\n");
+};
+
 export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompts: string[]) => {
     const subfNames: string[] = Object.keys(funs);
     let subfName: string = null;
@@ -52,8 +73,13 @@ export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompt
             prompts.forEach((prompt: string) => args.push(askPrompt(prompt, argTypeParsers.prompt)));
         }
         if (args.every((value: any) => check(value))) {
-            // TODO: Compare
-            console.log(funs[subfName](...args));
+            if (subfName === "compare") {
+                const compare: Function = funs.compare;
+                delete funs.compare;
+                console.log(compare(funs, askPrompt('Attempts:', questionInt), args));
+            } else {
+                console.log(funs[subfName](...args));
+            }
             exit(0);
         } else {
             throw new Error("Make sure you pass in valid arguments");
