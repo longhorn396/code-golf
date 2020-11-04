@@ -1,4 +1,4 @@
-import { ArgType, mainSubf as main } from './common';
+import { ArgType, compareSubfs, mainSubf as main } from './common';
 
 export const inOrderBranchPrediction = (text: string): string => {
     const results: string[] = text.split(" ").map((word: string) => {
@@ -41,5 +41,6 @@ export const wordInOrderReadability = (word: string): boolean => {
 
 main({
     branchPrediction: inOrderBranchPrediction,
-    readability: inOrderReadability
+    readability: inOrderReadability,
+    compare: compareSubfs
 }, ArgType.STRING, (value: string) => value.length, "What word(s)?");
