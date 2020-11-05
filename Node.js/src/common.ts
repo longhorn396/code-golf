@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks';
 import { argv, exit } from 'process';
 import { question, questionFloat, questionInt } from 'readline-sync';
 
@@ -45,13 +46,13 @@ export const compareSubfs = (funs: any, attempts: number, args: any[]): string =
         for (let j = 0; j < times.length; j++) {
             const { fun, name } = times[j];
             let time: number = timesMap[name] ? timesMap[name] : 0;
-            time -= Date.now();
+            time -= performance.now();
             fun(...args);
-            time += Date.now();
+            time += performance.now();
             timesMap[name] = time;
         }
     }
-    const results: string[] = times.map((result: any) => `${result.name.padEnd(spaces)} average: ${(timesMap[result.name]/attempts).toFixed(15)}`)
+    const results: string[] = times.map((result: any) => `${result.name.padEnd(spaces)} average ms: ${(timesMap[result.name]/attempts).toFixed(15)}`);
     return results.join("\n");
 };
 
