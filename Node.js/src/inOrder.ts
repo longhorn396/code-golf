@@ -39,8 +39,18 @@ export const wordInOrderReadability = (word: string): boolean => {
     return true;
 };
 
+export const inOrderHeuristic = (text: string): string => {
+    const results: string[] = text.split(" ").map((word: string) => {
+        const order: boolean = word.charAt(0) > 'm' ? wordInOrderReadability(word) : wordInOrderBranchPrediction(word);
+        const result: string = `${word} -${order ? '' : ' not'} in order`;
+        return result;
+    });
+    return results.join("\n");
+}
+
 main({
     branchPrediction: inOrderBranchPrediction,
     readability: inOrderReadability,
+    heuristic: inOrderHeuristic,
     compare: compareSubfs
 }, ArgType.STRING, (value: string) => value.length, "What word(s)?");
