@@ -2,23 +2,44 @@ import { performance } from 'perf_hooks';
 import { argv, exit } from 'process';
 import { question, questionFloat, questionInt } from 'readline-sync';
 
+/**
+ * @description Argument types
+ * @enum {string}
+ */
 export enum ArgType {
     FLOAT = 'FLOAT',
     INT = 'INT',
     STRING = 'STRING',
 };
 
+/**
+ * @type {Object.<ArgType, Object>}
+ */
 const argTypeParseMap = {
     [ArgType.FLOAT]: { argv: parseFloat, prompt: questionFloat },
     [ArgType.INT]: { argv: parseInt, prompt: questionInt },
     [ArgType.STRING]: { argv: (input: any) => input.toString(), prompt: question }
 };
 
-const askPrompt = (prompt: string, readline: Function): any => {
+/**
+ * @description Uses a `readline` function to ask `prompt` to the user.
+ * 
+ * @param {string}   prompt   - Prompt to the user for input.
+ * @param {Function} readline - Either `question`, `questionFloat`, or `questionInt` from `readline-async`.
+ * @returns {string | number} The result from the user.
+ */
+const askPrompt = (prompt: string, readline: Function): string | number => {
     return readline(`${prompt}\n`)
 };
 
-export const main = (fun: Function, argType: ArgType, ...prompts: string[]) => {
+/**
+ * @description Command-line runner for modules with only one function.
+ * 
+ * @param {Function} fun     - Function to run.
+ * @param {ArgType}  argType - Argument type.
+ * @param {string[]} prompts - Prompts to ask the user for input.
+ */
+export const main = (fun: Function, argType: ArgType, ...prompts: string[]): never => {
     let args: any[] = [];
     const argTypeParsers = argTypeParseMap[argType];
     if (argv.length > 2) {
@@ -35,7 +56,15 @@ export const main = (fun: Function, argType: ArgType, ...prompts: string[]) => {
     }
 };
 
-export const compareSubfs = (funs: any, attempts: number, args: any[]): string => {
+/**
+ * @description Compuets the average execution times of functions.
+ * 
+ * @param {Object.<string, Function>} funs     - Functions to compare.
+ * @param {number}                    attempts - Number of times to run each function.
+ * @param {string[] | number[]}       args     - Arguments to pass to each function.
+ * @returns {string} Newline-deliniated list of subfunctions and their average execution times.
+ */
+export const compareSubfs = (funs: any, attempts: number, args: string[] | number[]): string => {
     const subfNames: string[] = Object.keys(funs);
     const spaces: number = Math.max(...subfNames.map((fun: string) => fun.length));
     let times: any[] = subfNames.map((subfName: string) => {
@@ -56,7 +85,17 @@ export const compareSubfs = (funs: any, attempts: number, args: any[]): string =
     return results.join("\n");
 };
 
-export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompts: string[]) => {
+/**
+ * @description Command-line runner for modules with multiple functions.
+ * 
+ * @throws Error if any user input is invalid.
+ * 
+ * @param {Object.<string, Function>} funs    - Functions to compare.
+ * @param {ArgType}                   argType - Argument type.
+ * @param {Function}                  check   - Function to ensure arguments are valid
+ * @param {string[]}                  prompts - Prompts to ask the user for input.
+ */
+export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompts: string[]): never => {
     const subfNames: string[] = Object.keys(funs);
     let subfName: string = null;
     let args: any[] = [];
@@ -65,7 +104,7 @@ export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompt
         subfName = argv[2];
     } else {
         console.log("What subfunction would you like to do?")
-        subfName = askPrompt(`Options: ${subfNames.join(", ")}`, question);
+        subfName = askPrompt(`Options: ${subfNames.join(", ")}`, question) as string;
     }
     if (subfNames.includes(subfName)) {
         if (argv.length > 3) {
