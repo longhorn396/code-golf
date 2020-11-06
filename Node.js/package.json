@@ -5,7 +5,9 @@
   "main": "",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -r dist"
+    "clean": "rm -r dist",
+    "lint": "eslint **/*.ts",
+    "lint-fix": "eslint **/*.ts --fix"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,15 @@
     "@types/node": "^14.14.6",
     "@types/readline-sync": "^1.4.3",
     "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "typescript": "^4.0.5"
   }
 }
