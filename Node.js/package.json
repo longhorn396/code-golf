@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "build": "tsc",
-    "clean": "rm -r dist; rm -r .nyc_output",
+    "clean": "rm -rf dist; rm -rf .nyc_output",
     "lint": "eslint **/*.ts",
     "lint-fix": "eslint **/*.ts --fix",
     "test": "mocha -r ts-node/register test/test*.ts",
