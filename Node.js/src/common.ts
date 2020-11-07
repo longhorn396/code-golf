@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { performance } from "perf_hooks";
 import { argv, exit } from "process";
 import { question, questionFloat, questionInt } from "readline-sync";

@@ -78,9 +78,12 @@ export const inOrderHeuristic = (text: string): string => {
     return results.join("\n");
 };
 
-main({
-    branchPrediction: inOrderBranchPrediction,
-    readability: inOrderReadability,
-    heuristic: inOrderHeuristic,
-    compare: compareSubfs
-}, ArgType.STRING, (value: string) => value.length, "What word(s)?");
+/* istanbul ignore if */
+if (require.main === module) {
+    main({
+        branchPrediction: inOrderBranchPrediction,
+        readability: inOrderReadability,
+        heuristic: inOrderHeuristic,
+        compare: compareSubfs
+    }, ArgType.STRING, (value: string) => value.length, "What word(s)?");
+}

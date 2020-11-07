@@ -5,6 +5,7 @@ notes/
 #Node.js
 dist/
 node_modules/
+.nyc_output
 
 #Python
 __pycache__
