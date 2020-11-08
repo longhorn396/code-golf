@@ -5,6 +5,32 @@ import { argv, exit } from "process";
 import { question, questionFloat, questionInt } from "readline-sync";
 
 /**
+ * @typedef {number | string} Primative - Either a number or a string.
+ */
+type Primative = number | string;
+
+/**
+ * @interface Maps ArgTypes to parsers for argv and readline-sync.
+ */
+interface IArgTypeParseMap {
+    [key: string]: { argv: Function, prompt: Function };
+};
+
+/**
+ * @interface Maps function names to a function
+ */
+interface IFunctionMap {
+    [key: string]: Function;
+};
+
+/**
+ * @interface Maps function names to a number
+ */
+interface ITimesMap {
+    [key: string]: number;
+};
+
+/**
  * @description Argument types
  * @enum {string}
  */
@@ -17,10 +43,10 @@ export enum ArgType {
 /**
  * @type {Object.<ArgType, Object>}
  */
-const argTypeParseMap = {
+const argTypeParseMap: IArgTypeParseMap = {
     [ArgType.FLOAT]: { argv: parseFloat, prompt: questionFloat },
     [ArgType.INT]: { argv: parseInt, prompt: questionInt },
-    [ArgType.STRING]: { argv: (input: any) => input.toString(), prompt: question }
+    [ArgType.STRING]: { argv: (input: Primative) => input.toString(), prompt: question }
 };
 
 /**
@@ -28,9 +54,9 @@ const argTypeParseMap = {
  *
  * @param {string}   prompt   - Prompt to the user for input.
  * @param {Function} readline - Either `question`, `questionFloat`, or `questionInt` from `readline-async`.
- * @returns {string | number} The result from the user.
+ * @returns {Primative} The result from the user.
  */
-const askPrompt = (prompt: string, readline: Function): string | number => {
+const askPrompt = (prompt: string, readline: Function): Primative => {
     return readline(`${prompt}\n`);
 };
 
@@ -42,7 +68,7 @@ const askPrompt = (prompt: string, readline: Function): string | number => {
  * @param {string[]} prompts - Prompts to ask the user for input.
  */
 export const main = (fun: Function, argType: ArgType, ...prompts: string[]): never => {
-    const args: any[] = [];
+    const args: Primative[] = [];
     const argTypeParsers = argTypeParseMap[argType];
     if (argv.length > 2) {
         argv.slice(2, argv.length).forEach((arg: string) => args.push(argTypeParsers.argv(arg)));
@@ -63,27 +89,26 @@ export const main = (fun: Function, argType: ArgType, ...prompts: string[]): nev
  *
  * @param {Object.<string, Function>} funs     - Functions to compare.
  * @param {number}                    attempts - Number of times to run each function.
- * @param {string[] | number[]}       args     - Arguments to pass to each function.
+ * @param {Primative[]}       args     - Arguments to pass to each function.
  * @returns {string} Newline-deliniated list of subfunctions and their average execution times.
  */
-export const compareSubfs = (funs: any, attempts: number, args: string[] | number[]): string => {
+export const compareSubfs = (funs: IFunctionMap, attempts: number, args: Primative[]): string => {
     const subfNames: string[] = Object.keys(funs);
     const spaces: number = Math.max(...subfNames.map((fun: string) => fun.length));
-    const times: any[] = subfNames.map((subfName: string) => {
-        return { name: subfName, fun: funs[subfName] };
-    });
-    const timesMap: any = {};
+    const timesMap: ITimesMap = {};
     for (let i = 0; i < attempts; i++) {
-        for (let j = 0; j < times.length; j++) {
-            const { fun, name } = times[j];
-            let time: number = timesMap[name] ? timesMap[name] : 0;
+        subfNames.forEach((subfName: string) => {
+            const fun: Function = funs[subfName];
+            let time: number = timesMap[subfName] ? timesMap[subfName] : 0;
             time -= performance.now();
             fun(...args);
             time += performance.now();
-            timesMap[name] = time;
-        }
+            timesMap[subfName] = time;
+        });
     }
-    const results: string[] = times.map((result: any) => `${result.name.padEnd(spaces)} average ms: ${(timesMap[result.name] / attempts).toFixed(15)}`);
+    const results: string[] = subfNames.map((subfName: string) => {
+        return `${subfName.padEnd(spaces)} average ms: ${(timesMap[subfName] / attempts).toFixed(15)}`
+    });
     return results.join("\n");
 };
 
@@ -97,10 +122,10 @@ export const compareSubfs = (funs: any, attempts: number, args: string[] | numbe
  * @param {Function}                  check   - Function to ensure arguments are valid
  * @param {string[]}                  prompts - Prompts to ask the user for input.
  */
-export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompts: string[]): never => {
+export const mainSubf = (funs: IFunctionMap, argType: ArgType, check: Function, ...prompts: string[]): never => {
     const subfNames: string[] = Object.keys(funs);
     let subfName: string = null;
-    const args: any[] = [];
+    const args: Primative[] = [];
     const argTypeParsers = argTypeParseMap[argType];
     if (argv.length > 2) {
         subfName = argv[2];
@@ -114,7 +139,7 @@ export const mainSubf = (funs: any, argType: ArgType, check: Function, ...prompt
         } else {
             prompts.forEach((prompt: string) => args.push(askPrompt(prompt, argTypeParsers.prompt)));
         }
-        if (args.every((value: any) => check(value))) {
+        if (args.every((value: Primative) => check(value))) {
             if (subfName === "compare") {
                 const compare: Function = funs.compare;
                 delete funs.compare;
