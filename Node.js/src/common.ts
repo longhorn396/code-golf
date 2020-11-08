@@ -107,7 +107,7 @@ export const compareSubfs = (funs: IFunctionMap, attempts: number, args: Primati
         });
     }
     const results: string[] = subfNames.map((subfName: string) => {
-        return `${subfName.padEnd(spaces)} average ms: ${(timesMap[subfName] / attempts).toFixed(15)}`
+        return `${subfName.padEnd(spaces)} average ms: ${(timesMap[subfName] / attempts).toFixed(15)}`;
     });
     return results.join("\n");
 };
