@@ -1,6 +1,12 @@
-import { ArgType, main } from "./common";
+import { ArgType, compareSubfs, mainSubf } from "./common";
 
-export const disemvowel = (text: string): string => {
+/**
+ * @description Separate consonants and vowels from text using Arrays internally.
+ *
+ * @param {string} text - Words to disemvowel.
+ * @returns {string} The connsonants from the text followed by the removed vowels.
+ */
+export const disemvowelArrays = (text: string): string => {
     const cons: string[] = [];
     const vowels: string[] = [];
     text.split("").forEach((char: string) => {
@@ -13,7 +19,30 @@ export const disemvowel = (text: string): string => {
     return `${cons.join("")} ${vowels.join("")}`;
 };
 
+/**
+ * @description Separate consonants and vowels from text using Strings internally.
+ *
+ * @param {string} text - Words to disemvowel.
+ * @returns {string} The connsonants from the text followed by the removed vowels.
+ */
+export const disemvowelStrings = (text: string): string => {
+    let cons: string = "";
+    let vowels: string = "";
+    text.split("").forEach((char: string) => {
+        if ("aeiouAEIOU".includes(char)) {
+            vowels += char;
+        } else if (char >= "A" && char <= "z") {
+            cons += char;
+        }
+    });
+    return `${cons} ${vowels}`;
+};
+
 /* istanbul ignore if */
 if (require.main === module) {
-    main(disemvowel, ArgType.STRING, "What word(s)?");
+    mainSubf({
+        arrays: disemvowelArrays,
+        strings: disemvowelStrings,
+        compare: compareSubfs
+    }, ArgType.STRING, (value: string) => value.length, "What word(s)?");
 }
