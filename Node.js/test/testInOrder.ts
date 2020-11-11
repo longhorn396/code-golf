@@ -33,7 +33,7 @@ describe("inOrder", () => {
             });
         });
     });
-    describe("test function tests", () => {
+    describe("text function tests", () => {
         describe("inOrderBranchPrediction", () => {
             it("should display ' - in order\\n' if a word's characters are in alphabetical order", () => {
                 expect(inOrderBranchPrediction(alphaTextInput)).to.equal(alphaTextResult);

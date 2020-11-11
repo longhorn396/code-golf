@@ -1,4 +1,4 @@
-import { ArgType, compareSubfs, mainSubf } from "./common";
+import { ArgType, compareSubfs, mainSubf as main } from "./common";
 
 /**
  * @description Separate consonants and vowels from text using Arrays internally.
@@ -40,7 +40,7 @@ export const disemvowelStrings = (text: string): string => {
 
 /* istanbul ignore if */
 if (require.main === module) {
-    mainSubf({
+    main({
         arrays: disemvowelArrays,
         strings: disemvowelStrings,
         compare: compareSubfs
