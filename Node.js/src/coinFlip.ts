@@ -19,5 +19,5 @@ export const coinFlipReduce = (numFlips: number): string => {
 
 /* istanbul ignore if */
 if (require.main === module) {
-    main(coinFlipReduce, ArgType.STRING, "How many coins to flip?");
+    main(coinFlipReduce, ArgType.INT, "How many coins to flip?");
 }
