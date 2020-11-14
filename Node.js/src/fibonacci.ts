@@ -30,6 +30,7 @@ export const lessDumbFibonacci = (i: number): IFibonacciOutput => {
     const { sequence } = result;
     const len = sequence.length;
     const fibonacciNumber = sequence[len - 1] + sequence[len - 2];
+    sequence.push(fibonacciNumber);
     return { i, fibonacciNumber, sequence };
 };
 
@@ -40,7 +41,7 @@ export const iterativeFibonacci = (i: number): IFibonacciOutput => {
     const sequence = [0, 1];
     while (i > sequence.length) {
         const len = sequence.length;
-        sequence.push(sequence[len - 1], sequence[len - 2]);
+        sequence.push(sequence[len - 1] + sequence[len - 2]);
     }
     return { i, fibonacciNumber: sequence[sequence.length - 1], sequence };
 };
@@ -56,7 +57,7 @@ export const recursiveFibonacci = (i: number, sequence: number[] = null): IFibon
     }
     if (i > sequence.length) {
         const len = sequence.length;
-        sequence.push(sequence[len - 1], sequence[len - 2]);
+        sequence.push(sequence[len - 1] + sequence[len - 2]);
         return recursiveFibonacci(i, sequence);
     }
     return { i, fibonacciNumber: sequence[sequence.length - 1], sequence };
