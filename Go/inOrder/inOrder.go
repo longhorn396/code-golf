@@ -1,7 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"errors"
 	"fmt"
+	"log"
+	"os"
 	"strings"
 )
 
@@ -70,7 +74,29 @@ func WordInOrderReadability(word []rune) bool {
 }
 
 func main() {
-	fmt.Println(InOrderBranchPrediction("almost chef"))
-	fmt.Println(InOrderReadability("bit dig"))
-	fmt.Println(InOrderHeuristic("billowy nope"))
+	var subf, text string
+	subfs := map[string]func(text string) string{
+		"branchPrediction": InOrderBranchPrediction,
+		"readability":      InOrderReadability,
+		"heuristic":        InOrderHeuristic,
+	}
+	if len(os.Args) > 1 {
+		subf = os.Args[1]
+	} else {
+		fmt.Println("What subfunction would you like to do?")
+		fmt.Println("Options: branchPrediction, readability, heuristic, compare")
+		fmt.Scanln(&subf)
+	}
+	if len(os.Args) > 2 {
+		text = os.Args[2]
+	} else {
+		fmt.Println("What word(s)?")
+		text, _ = bufio.NewReader(os.Stdin).ReadString('\n')
+		text = text[:len(text)-1]
+	}
+	if f, ok := subfs[subf]; ok {
+		fmt.Print(f(text))
+	} else {
+		log.Fatal(errors.New("No matching subfunction for " + subf))
+	}
 }
