@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 func InOrder(text string, f func(word []rune) bool) string {
@@ -73,12 +74,33 @@ func WordInOrderReadability(word []rune) bool {
 	return true
 }
 
+func CompareSubfs(text string) string {
+	var attempts int
+	var result string = ""
+	subfs := map[string]func(text string) string{
+		"branchPrediction": InOrderBranchPrediction,
+		"readability":      InOrderReadability,
+		"heuristic":        InOrderHeuristic,
+	}
+	fmt.Println("How many attempts?")
+	fmt.Scanln(&attempts)
+	for subfName, subf := range subfs {
+		start := time.Now()
+		for i := 0; i < attempts; i++ {
+			_ = subf(text)
+		}
+		result += fmt.Sprintf("%s took %s\n", subfName, time.Since(start))
+	}
+	return result
+}
+
 func main() {
 	var subf, text string
 	subfs := map[string]func(text string) string{
 		"branchPrediction": InOrderBranchPrediction,
 		"readability":      InOrderReadability,
 		"heuristic":        InOrderHeuristic,
+		"compare":          CompareSubfs,
 	}
 	if len(os.Args) > 1 {
 		subf = os.Args[1]
@@ -87,14 +109,14 @@ func main() {
 		fmt.Println("Options: branchPrediction, readability, heuristic, compare")
 		fmt.Scanln(&subf)
 	}
-	if len(os.Args) > 2 {
-		text = os.Args[2]
-	} else {
-		fmt.Println("What word(s)?")
-		text, _ = bufio.NewReader(os.Stdin).ReadString('\n')
-		text = text[:len(text)-1]
-	}
 	if f, ok := subfs[subf]; ok {
+		if len(os.Args) > 2 {
+			text = os.Args[2]
+		} else {
+			fmt.Println("What word(s)?")
+			text, _ = bufio.NewReader(os.Stdin).ReadString('\n')
+			text = text[:len(text)-1]
+		}
 		fmt.Print(f(text))
 	} else {
 		log.Fatal(errors.New("No matching subfunction for " + subf))
