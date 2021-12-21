@@ -2,9 +2,9 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"log"
+	"longhorn396/gocg"
 	"os"
 	"strings"
 	"time"
@@ -95,21 +95,15 @@ func CompareSubfs(text string) string {
 }
 
 func main() {
-	var subf, text string
 	subfs := map[string]func(text string) string{
 		"branchPrediction": InOrderBranchPrediction,
 		"readability":      InOrderReadability,
 		"heuristic":        InOrderHeuristic,
 		"compare":          CompareSubfs,
 	}
-	if len(os.Args) > 1 {
-		subf = os.Args[1]
-	} else {
-		fmt.Println("What subfunction would you like to do?")
-		fmt.Println("Options: branchPrediction, readability, heuristic, compare")
-		fmt.Scanln(&subf)
-	}
-	if f, ok := subfs[subf]; ok {
+	subf, err := gocg.FindSubf(subfs)
+	if err == nil {
+		var text string
 		if len(os.Args) > 2 {
 			text = os.Args[2]
 		} else {
@@ -117,8 +111,8 @@ func main() {
 			text, _ = bufio.NewReader(os.Stdin).ReadString('\n')
 			text = text[:len(text)-1]
 		}
-		fmt.Print(f(text))
+		fmt.Print(subfs[subf](text))
 	} else {
-		log.Fatal(errors.New("No matching subfunction for " + subf))
+		log.Fatal(err)
 	}
 }

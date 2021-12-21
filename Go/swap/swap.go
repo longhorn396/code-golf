@@ -1,9 +1,9 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"log"
+	"longhorn396/gocg"
 	"os"
 	"time"
 )
@@ -65,8 +65,6 @@ func CompareWrapper(i int, j int) (int, int) {
 }
 
 func main() {
-	var i, j int
-	var subf string
 	subfs := map[string]func(i int, j int) (int, int){
 		"temp":    TempSwap,
 		"temp2":   Temp2Swap,
@@ -75,23 +73,18 @@ func main() {
 		"xor":     XorSwap,
 		"compare": CompareWrapper,
 	}
-	if len(os.Args) > 1 {
-		subf = os.Args[1]
-	} else {
-		fmt.Println("What subfunction would you like to do?")
-		fmt.Println("Options: temp, temp2, tuple, return, xor, compare")
-		fmt.Scanln(&subf)
-	}
-	if f, ok := subfs[subf]; ok {
+	subf, err := gocg.FindSubf(subfs)
+	if err == nil {
+		var i, j int
 		if len(os.Args) > 3 {
-			i, _ = fmt.Sscan(os.Args[2], &i)
-			j, _ = fmt.Sscan(os.Args[3], &j)
+			fmt.Sscan(os.Args[2], &i)
+			fmt.Sscan(os.Args[3], &j)
 		} else {
 			fmt.Println("Enter two Integers:")
 			fmt.Scanf("%d %d", &i, &j)
 		}
-		fmt.Print(f(i, j))
+		fmt.Print(subfs[subf](i, j))
 	} else {
-		log.Fatal(errors.New("No matching subfunction for " + subf))
+		log.Fatal(err)
 	}
 }
